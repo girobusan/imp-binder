@@ -11,24 +11,27 @@
         console.log("Iframe loaded");
         const f = document.getElementById("display");
         window.document.title = f.contentWindow.document.title;
+        console.log(f.contentWindow.location.pathname)
+        const p = f.contentWindow.location.pathname;
+         window.location.hash = "#" + p
+         .replace(/#[^#]+$/ , "")
     }
       const defaultTitle = window.document.title;
       //check if ...
       window.addEventListener("load" , ()=>{
         const f = document.getElementById("display");
-        console.log("frame" , f.contentWindow.document.title);
+         if(window.location.hash.length>3){
+           const loc = window.location.hash.substring(1);
+           const ifr = document.getElementById("display");
+           ifr.setAttribute("src" , loc + "#view");
+
+         }
+         f.addEventListener("load" ,IframeLoaded);
       })
 
      //add editor
      if(window.location.protocol=="file:"){
        window.addEventListener( "load" , ()=>{
-         if(window.location.hash.length>3){
-           const loc = window.location.hash.substring(1);
-           const ifr = document.getElementById("display");
-           ifr.setAttribute("src" , loc + "#view");
-           console.log("hash" , window.location.hash.substring(1));
-
-         }
          const e = document.createElement("script");
          e.id="editorScript";
          e.src = "editor.js";
@@ -36,12 +39,6 @@
          h.appendChild(e);
        });
      }
-     window.addEventListener("click" , (e)=>{
-       if(e.target.href){
-         window.location.hash = "#" + e.target.getAttribute( "href" )
-         .replace(/#[^#]+$/ , "")
-          }
-     })
 
   </script>
   
@@ -53,7 +50,7 @@
     <li><a href="page.html#view" target="display">Second</a></li>
   </ul>
   </nav>
-  <iframe name="display" id="display" src="cover.html#view" onload="IframeLoaded()">!!
+  <iframe name="display" id="display" src="cover.html#view" >!!
   </iframe>
 </body>
 </html>
