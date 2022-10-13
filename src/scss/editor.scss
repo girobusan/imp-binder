@@ -1,1 +1,33 @@
+#editorContainer{
+   position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
+.BinderEditor{
+  box-sizing: border-box;
+}
 
+.BinderEditor.panel{
+  background-color: #666;
+  border-radius: 6px;
+  color: white;
+  padding: 8px;
+  .actions{
+    margin-left: 4px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    input{
+      margin-right: 4px;
+    }
+  }
+}
+
+.linkForm{
+  padding: 4px;
+  input{
+    margin-right: 4px;
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}

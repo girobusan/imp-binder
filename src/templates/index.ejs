@@ -2,15 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>IMP Binder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="view.css" />
+  <meta name="description" content="The page description" >
+  <script>
+     //add editor
+     if(window.location.protocol=="file:"){
+       window.addEventListener( "load" , ()=>{
+         const e = document.createElement("script");
+         e.id="editorScript";
+         e.src = "editor.js";
+         const h = window.document.body;
+         h.appendChild(e);
+       });
+     }
+
+  </script>
   
 </head>
 <body>
   <nav id="menu">
   <ul>
-    <li><a href="imp1.html#view" target="display">Main</a></li>
+    <li><a href="imp1.html#view" target="display" data-title="O la la">Main</a></li>
     <li><a href="favicon.html#view" target="display">Second</a></li>
   </ul>
   </nav>
