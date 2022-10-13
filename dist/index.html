@@ -11,12 +11,11 @@
         console.log("Iframe loaded");
         const f = document.getElementById("display");
         window.document.title = f.contentWindow.document.title;
-        console.log(f.contentWindow.location.pathname)
+        //console.log(f.contentWindow.location.pathname)
         const p = f.contentWindow.location.pathname;
          window.location.hash = "#" + p
          .replace(/#[^#]+$/ , "")
     }
-      const defaultTitle = window.document.title;
       //check if ...
       window.addEventListener("load" , ()=>{
         const f = document.getElementById("display");
@@ -42,7 +41,7 @@
 
   </script>
   
-<script defer src="viewer.js"></script></head>
+</head>
 <body>
   <nav id="menu">
   <ul>

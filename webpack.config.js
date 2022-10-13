@@ -87,6 +87,7 @@ module.exports = function (env, argv) {
         chunks: ["viewer"],
         filename: 'index.html',
         minify: false,
+        inject: false,
         // scriptLoading: 'defer',
         template: path.join(__dirname, "src/templates/index.ejs"),
       }
