@@ -25,7 +25,6 @@ class LinkForm extends Component{
 
   componentDidUpdate(){
 
-    this.handler(this.state, this.props.index);
   }
 
   onChange(){
@@ -35,6 +34,12 @@ class LinkForm extends Component{
        title: this.titleF.current.value,
        name: this.itemF.current.value,
     })
+
+    this.handler({
+       href: this.linkF.current.value,
+       title: this.titleF.current.value,
+       name: this.itemF.current.value,
+    }, this.props.index);
           
   }
   
@@ -58,7 +63,11 @@ class BinderEditor extends Component{
     this.switchOpen = this.switchOpen.bind(this);
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.changeItem = this.changeItem.bind(this);
     // console.log("state" , props.settings.links )
+  }
+  componentDidUpdate(){
+  console.log("Component updated");
   }
 
   switchOpen(){
@@ -69,12 +78,27 @@ class BinderEditor extends Component{
     const a = this.state.links.map(e=>e);
     a.push({href: href , title: title , name: name});
     this.setState({links: a})
+    setSettings({
+       links:a
+    })
   }
   removeItem(idx){
     // console.log("delete" , idx);
     const a = this.state.links.filter((e,i)=>i!=idx);
     // console.log("a" , a);
     this.setState({links: a})
+    setSettings({
+       links:a
+    })
+  }
+  changeItem(itm, idx){
+  console.log("chanche item" , itm , idx);
+    const a = this.state.links.map(e=>e);
+    a[idx] = itm;
+    this.setState({links: a});
+    setSettings({
+       links:a
+    })
   }
 
   render(){
@@ -96,6 +120,7 @@ class BinderEditor extends Component{
       title=${l.title}
       name=${l.name}
       del=${this.removeItem}
+      handler=${this.changeItem}
       index=${i} />`)}
       <div class="actions">
       <input type="button" value="add" onClick=${()=>this.addItem("href", "name", "title")}></input>

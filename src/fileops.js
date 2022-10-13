@@ -18,10 +18,10 @@ export function getSettings(){
   return {  title: title , description: description , links: linksObj }
 }
 
-function setSettings(s){
-  console.log("setSettings()");
-  window.document.title.innerHTML = s.title;
-  description.content = s.description;
+export function setSettings(s){
+  console.log("setSettings()" , s);
+  // doc.title.innerHTML = s.title;
+  // description.content = s.description;
   //links
   const lnk = doc.querySelector("nav ul");
   const ifr = doc.querySelector("iframe");
@@ -29,11 +29,13 @@ function setSettings(s){
 
   lnk.innerHTML = "";
   s.links.forEach(l=>{
+      console.log("link" , l)
       const li = document.createElement("li");
       const a = document.createElement("a");
       a.href = l.href + "#view";
-      a.innerHTML = a.name;
-      a.dataset.title = a.title || a.name;
+      a.innerHTML = l.name;
+      a.target="display";
+      a.dataset.title = l.title || l.name;
       li.appendChild(a);
       lnk.appendChild(li);
   })

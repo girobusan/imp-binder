@@ -7,10 +7,28 @@
   <link rel="stylesheet" href="view.css" />
   <meta name="description" content="The page description" >
   <script>
+    function IframeLoaded(){
+        console.log("Iframe loaded");
+        const f = document.getElementById("display");
+        window.document.title = f.contentWindow.document.title;
+    }
+      const defaultTitle = window.document.title;
+      //check if ...
+      window.addEventListener("load" , ()=>{
+        const f = document.getElementById("display");
+        console.log("frame" , f.contentWindow.document.title);
+      })
+
      //add editor
-     console.log(window.location.protocol);
      if(window.location.protocol=="file:"){
        window.addEventListener( "load" , ()=>{
+         if(window.location.hash.length>3){
+           const loc = window.location.hash.substring(1);
+           const ifr = document.getElementById("display");
+           ifr.setAttribute("src" , loc + "#view");
+           console.log("hash" , window.location.hash.substring(1));
+
+         }
          const e = document.createElement("script");
          e.id="editorScript";
          e.src = "editor.js";
@@ -18,6 +36,12 @@
          h.appendChild(e);
        });
      }
+     window.addEventListener("click" , (e)=>{
+       if(e.target.href){
+         window.location.hash = "#" + e.target.getAttribute( "href" )
+         .replace(/#[^#]+$/ , "")
+          }
+     })
 
   </script>
   
@@ -25,11 +49,11 @@
 <body>
   <nav id="menu">
   <ul>
-    <li><a href="imp1.html#view" target="display" data-title="O la la">Main</a></li>
-    <li><a href="favicon.html#view" target="display">Second</a></li>
+    <li><a href="cover.html#view" target="display" data-title="O la la">Main</a></li>
+    <li><a href="page.html#view" target="display">Second</a></li>
   </ul>
   </nav>
-  <iframe name="display" id="display">!!
+  <iframe name="display" id="display" src="cover.html#view" onload="IframeLoaded()">!!
   </iframe>
 </body>
 </html>
