@@ -6,36 +6,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="view.css" />
   <meta name="description" content="The page description" >
+  <meta property="og:image" content="preview.jpg">
+  
   <script>
+    //if page changed
     function IframeLoaded(){
         console.log("Iframe loaded");
         const f = document.getElementById("display");
-        window.document.title = f.contentWindow.document.title;
-        //console.log(f.contentWindow.location.pathname)
-        const p = f.contentWindow.location.pathname;
-         window.location.hash = "#" + p
-         .replace(/#[^#]+$/ , "")
+        try{
+          window.document.title = f.contentWindow.document.title;
+          //console.log(f.contentWindow.location.pathname)
+          const p = f.contentWindow.location.pathname;
+          window.location.hash = "#" + p
+          .replace(/#[^#]+$/ , "")
+          }catch{
+        }
     }
-      //check if ...
+      //check if there is a hash (open that file) 
       window.addEventListener("load" , ()=>{
         const f = document.getElementById("display");
          if(window.location.hash.length>3){
            const loc = window.location.hash.substring(1);
+           window.currentPage = loc;
            const ifr = document.getElementById("display");
            ifr.setAttribute("src" , loc + "#view");
 
+           }else{
+           window.currentPage = f.getAttribute("src");
          }
          f.addEventListener("load" ,IframeLoaded);
       })
 
-     //add editor
+     //add editor, if we opened locally
      if(window.location.protocol=="file:"){
+       //let follow links 
        window.addEventListener( "load" , ()=>{
+       const lnks = window.document.querySelectorAll("nav li a");
+       console.log("lnks" , lnks);
+       Array.from(lnks)
+       .forEach(e=>e.addEventListener("click" , 
+       (evt)=>{window.currentPage=e.getAttribute("href")}));
          const e = document.createElement("script");
          e.id="editorScript";
          e.src = "editor.js";
-         const h = window.document.body;
-         h.appendChild(e);
+         window.document.body.appendChild(e);
        });
      }
 
@@ -43,12 +57,15 @@
   
 </head>
 <body>
+  <aside>
+  <div id="logo">IMP!<br/>Bin<br/>der</div>
   <nav id="menu">
   <ul>
     <li><a href="cover.html#view" target="display" data-title="O la la">Main</a></li>
     <li><a href="page.html#view" target="display">Second</a></li>
   </ul>
   </nav>
+  </aside>
   <iframe name="display" id="display" src="cover.html#view" >!!
   </iframe>
 </body>

@@ -45,10 +45,9 @@ class LinkForm extends Component{
   
   render(){
     return html`<div class="linkForm">
+    <input type="text" value=${this.state.name} ref=${this.itemF} onChange=${this.onChange}></input>
     <input type="text" value=${this.state.href} ref=${this.linkF} 
     onChange=${this.onChange}></input>
-    <input type="text" value=${this.state.title} ref=${this.titleF} onChange=${this.onChange}></input>
-    <input type="text" value=${this.state.name} ref=${this.itemF} onChange=${this.onChange}></input>
     <input type="button" value="del" onClick=${()=>this.deleter(this.props.index)}></input>
      </div>` 
   }
@@ -101,6 +100,27 @@ class BinderEditor extends Component{
     })
   }
 
+  togglePageEditor(){
+    let cp = window.currentPage;
+    if(!cp){ return; }
+    const hashIdx = cp.indexOf("#");
+    const cph =hashIdx==-1 ? "" :  cp.substring(hashIdx);
+    // console.log("cph" , cph);
+    if(cph==="#view"){
+       cp = cp.replace("#view" , "") 
+    }
+    if(cph==="#edit" ){
+       cp = cp.replace("#edit" , "#view") 
+    }
+    if(!cph){
+      cp= cp+="#view"
+    }
+    // console.log("Going to" , cp);
+    const ifr = document.querySelector("#display");
+    window.currentPage = cp;
+    ifr.src = cp;
+  }
+
   render(){
     //button if not active
     //editor panel if active
@@ -111,7 +131,10 @@ class BinderEditor extends Component{
     //add menuitem
     //---
     return html`<${If} condition=${!this.state.open}>
-    <div clas="BinderEditor button" onClick=${this.switchOpen}>edit</div>
+    <div class="BinderEditor buttons" >
+    <input type="button" value="Edit binder" onClick=${this.switchOpen}></input>
+    <input type="button" value="Edit page" onClick=${this.togglePageEditor}></input>
+    </div>
     </${If}><${If} condition=${this.state.open}>
     <!--editor-->
     <div class="BinderEditor panel" >

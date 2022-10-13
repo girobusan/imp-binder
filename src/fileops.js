@@ -5,7 +5,7 @@ const description = doc.querySelector("meta[name=description]").content;
 export function getSettings(){
   //title
   const title = doc.title;
-  // const img = doc.querySelector("meta[name=og:image]").content;
+  const img = doc.querySelector("meta[property='og:image']").content;
   const links = doc.querySelectorAll("nav li a");
   const linksObj = Array.from(links).map(e=>{return { 
      href: e.getAttribute("href").replace(/#[^#]+$/ , ""),
@@ -15,7 +15,7 @@ export function getSettings(){
 
   }});
 
-  return {  title: title , description: description , links: linksObj }
+  return {  title: title , description: description , image: img , links: linksObj }
 }
 
 export function setSettings(s){

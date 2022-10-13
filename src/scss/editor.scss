@@ -7,8 +7,13 @@
   box-sizing: border-box;
 }
 
+.BinderEditor.buttons{
+  display: flex;
+  flex-direction: column;
+}
+
 .BinderEditor.panel{
-  background-color: #666;
+  background-color: #333;
   border-radius: 6px;
   color: white;
   padding: 8px;

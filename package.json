@@ -4,11 +4,11 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "css-watch": "npx sass --watch src/scss/core.scss:dist/style.css --style compressed",
+    "css-watch": "npx sass --watch src/scss/view.scss:dist/view.css --style compressed",
     "cssbuild": "npx sass src/scss/view.scss:dist/view.css --no-source-map",
     "build": "npx webpack --mode production",
     "watch": "npx webpack --mode development",
-    "postbuild": "shx rm dist/loader.js dist/*.map"
+    "postbuild": "shx rm dist/*.map"
   },
   "author": "",
   "license": "ISC",
