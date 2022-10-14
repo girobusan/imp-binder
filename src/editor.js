@@ -28,16 +28,16 @@ class LinkForm extends Component{
   }
 
   onChange(){
-    console.log('change...');
+    // console.log('change...');
     this.setState({
        href: this.linkF.current.value,
-       title: this.titleF.current.value,
+       title: this.itemF.current.value,
        name: this.itemF.current.value,
     })
 
     this.handler({
        href: this.linkF.current.value,
-       title: this.titleF.current.value,
+       title: this.itemF.current.value,
        name: this.itemF.current.value,
     }, this.props.index);
           
@@ -148,7 +148,7 @@ class BinderEditor extends Component{
       <div class="actions">
       <input type="button" value="add" onClick=${()=>this.addItem("href", "name", "title")}></input>
       <input type="button" value="close" onClick=${this.switchOpen}></input>
-      <input type="button" value="save binder" onClick=${this.switchOpen}></input>
+      <input type="button" value="save binder" onClick=${saveFile}></input>
       <input type="button" value="toggle page editor" onClick=${this.switchOpen}></input>
       </div>
     </div>
@@ -158,15 +158,27 @@ class BinderEditor extends Component{
 }
 
 export function makeEditable(){
- console.log("editable.") 
- console.log( getSettings() )
- const s = document.querySelector("#editorScript");
- s.remove();
- const edel = document.createElement("div");
- edel.id="editorContainer";
- const ed = h(BinderEditor, {settings: getSettings()});
- window.document.body.appendChild(edel);
- render(ed , edel);
+  //do save clicked 
+  // const lnks = window.document.querySelectorAll("nav li a");
+  // console.log("lnks" , lnks);
+  // Array.from(lnks)
+  window.addEventListener("click" , 
+    (evt)=>{
+       if(evt.target.getAttribute("href"))
+       {
+         window.currentPage=evt.target.getAttribute("href")
+       }
+    });
+
+    console.log("editable.") 
+    console.log( getSettings() )
+    const s = document.querySelector("#editorScript");
+    s.remove();
+    const edel = document.createElement("div");
+    edel.id="editorContainer";
+    const ed = h(BinderEditor, {settings: getSettings()});
+    window.document.body.appendChild(edel);
+    render(ed , edel);
 
 
 }

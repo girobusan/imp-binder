@@ -41,6 +41,24 @@ export function setSettings(s){
   })
 }
 
-function saveFile(){
+
+export function saveToDisk(name,content){
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+  element.setAttribute('download', name);
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+
+}
+
+export function saveFile(){
+  //clone doc
+  const clone = window.document.cloneNode(true);
+  clone.getElementById("editorContainer").remove();
+  clone.querySelector("style").remove();
+  const htm = clone.documentElement.outerHTML;
+  saveToDisk("index.html", htm);
+
  
 }

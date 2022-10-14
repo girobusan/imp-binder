@@ -7,15 +7,15 @@
   <link rel="stylesheet" href="view.css" />
   <meta name="description" content="The page description" >
   <meta property="og:image" content="preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="preview.jpg">
   
-  <script>
+  <script id="pageScript">
     //if page changed
     function IframeLoaded(){
-        console.log("Iframe loaded");
         const f = document.getElementById("display");
         try{
           window.document.title = f.contentWindow.document.title;
-          //console.log(f.contentWindow.location.pathname)
           const p = f.contentWindow.location.pathname;
           window.location.hash = "#" + p
           .replace(/#[^#]+$/ , "")
@@ -39,13 +39,7 @@
 
      //add editor, if we opened locally
      if(window.location.protocol=="file:"){
-       //let follow links 
        window.addEventListener( "load" , ()=>{
-       const lnks = window.document.querySelectorAll("nav li a");
-       console.log("lnks" , lnks);
-       Array.from(lnks)
-       .forEach(e=>e.addEventListener("click" , 
-       (evt)=>{window.currentPage=e.getAttribute("href")}));
          const e = document.createElement("script");
          e.id="editorScript";
          e.src = "editor.js";
@@ -66,7 +60,8 @@
   </ul>
   </nav>
   </aside>
-  <iframe name="display" id="display" src="cover.html#view" >!!
+  <iframe name="display" id="display" src="cover.html#view" >
+    This pages uses iframe :(
   </iframe>
 </body>
 </html>
