@@ -33,7 +33,7 @@ module.exports = function (env, argv) {
 
     mode: argv.mode,
     entry: {
-      "editor": './src/editor.js',
+      "binder": './src/editor.js',
       "viewer": './src/view.js'
     },
     devtool: argv.mode != "production" ? 'inline-source-map' : false, 

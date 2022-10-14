@@ -16,9 +16,7 @@
       font-weight:900 ;
       font-size: 48px;
       text-align: left;
-      color: gray;
-      line-height: 70%;
-      padding: 16px;
+      padding: 32px 16px;
     }
     nav{
       display: flex;
@@ -43,6 +41,7 @@
         letter-spacing: 0.05em;
         display: block;
         padding: 8px 16px;
+        padding-right: 32px;
         &:hover{
           color: yellow;
           background-color: #444;

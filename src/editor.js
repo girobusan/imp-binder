@@ -133,7 +133,7 @@ class BinderEditor extends Component{
     return html`<${If} condition=${!this.state.open}>
     <div class="BinderEditor buttons" >
     <input type="button" value="Edit binder" onClick=${this.switchOpen}></input>
-    <input type="button" value="Edit page" onClick=${this.togglePageEditor}></input>
+    <input type="button" value="Toggle page editor" onClick=${this.togglePageEditor}></input>
     </div>
     </${If}><${If} condition=${this.state.open}>
     <!--editor-->
@@ -146,10 +146,10 @@ class BinderEditor extends Component{
       handler=${this.changeItem}
       index=${i} />`)}
       <div class="actions">
-      <input type="button" value="add" onClick=${()=>this.addItem("href", "name", "title")}></input>
-      <input type="button" value="close" onClick=${this.switchOpen}></input>
-      <input type="button" value="save binder" onClick=${saveFile}></input>
-      <input type="button" value="toggle page editor" onClick=${this.switchOpen}></input>
+      <input type="button" value="Add menu item" onClick=${()=>this.addItem("href", "name", "title")}></input>
+      <input type="button" value="Save binder" onClick=${saveFile}></input>
+
+      <input type="button" value="Close" onClick=${this.switchOpen}></input>
       </div>
     </div>
     </${If}>` ;

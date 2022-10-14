@@ -10,6 +10,13 @@
 .BinderEditor.buttons{
   display: flex;
   flex-direction: column;
+  input{
+    width: 100%;
+    margin-bottom: 6px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
 }
 
 .BinderEditor.panel{
