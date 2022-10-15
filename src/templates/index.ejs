@@ -43,7 +43,7 @@
         window.location = f.getAttribute("src");
     }
       //check if there is a hash (open that file) 
-      window.addEventListener("load" , ()=>{
+      window.addEventListener("DOMContentLoaded" , ()=>{
         const n = document.getElementById("menu");
         n.classList.add("hidden");
         const f = document.getElementById("display");
