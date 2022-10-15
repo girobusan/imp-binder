@@ -1,22 +1,48 @@
+$mwidth: 800px;
     body,html{
       padding: 0;
       margin:0;
       min-height: 100vh;
       
     }
+    .mobile{
+      display: none;
+      @media(max-width: $mwidth){
+        &{
+          display: inherit
+        }
+      }
+    }
+    .desktop{
+      display: inherit;
+      @media(max-width: $mwidth){
+        &{
+          display: none;
+        }
+      }
+    }
     body{
       height: 100%;
-      background-color: #666;
+      background-color: #333;
       display: flex;
       flex-direction: row;
       font-family: Arial, Helvetica, sans-serif;
+      @media(max-width: $mwidth){
+        &{
+          flex-direction: column;
+        }
+      }
     }
-    #logo{
+    #logo.desktop{
       // height: 200px;
       font-weight:900 ;
       font-size: 48px;
       text-align: left;
-      padding: 32px 16px;
+      padding: 32px 32px;
+text-shadow: black 1px 0 10px;
+    }
+    aside{
+      max-width: 300px;
     }
     nav{
       display: flex;
@@ -30,6 +56,14 @@
         margin:0;
         padding-bottom: 15vh;
         width: 100%;
+        @media(max-width: $mwidth){
+          &{
+            padding-bottom: 0;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+        }
       }
       li{
         list-style: none;
@@ -40,10 +74,10 @@
         text-decoration: none;
         letter-spacing: 0.05em;
         display: block;
-        padding: 8px 16px;
+        padding: 8px 32px;
         padding-right: 32px;
         &:hover{
-          color: yellow;
+          color: ivory;
           background-color: #444;
         }
       }

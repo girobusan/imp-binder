@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!--YOU MAY TWEAK THIS FILE FOR YOUR NEEDS-->
+  <!--There are few contrains: -->
+
+  <!-- 1. DO NOT use <style> tags. -->
+  <!-- 2. DO NOT change menu structure, it must always be like 
+          nav -> ul -> li -> a -->
+  <!-- 3. DO NOT change <iframe> tag id and name. -->
+  <!-- 4. BETTER NOT to touch script#pageScript. -->
+
   <meta charset="UTF-8">
   <title>IMP Binder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +30,11 @@
           .replace(/#[^#]+$/ , "")
           }catch{
         }
+    }
+
+    function removeMenu(){
+        const f = document.getElementById("display");
+        window.location = f.getAttribute("src");
     }
       //check if there is a hash (open that file) 
       window.addEventListener("load" , ()=>{
@@ -52,7 +66,7 @@
 </head>
 <body>
   <aside>
-  <div id="logo">📕</div>
+  <div id="logo" class="desktop">📕</div>
   <nav id="menu">
   <ul>
     <li><a href="cover.html#view" target="display" data-title="O la la">Main</a></li>
@@ -61,7 +75,7 @@
   </nav>
   </aside>
   <iframe name="display" id="display" src="cover.html#view" >
-    This pages uses iframe :(
+    This page uses iframe, but your browser doesn't support it.
   </iframe>
 </body>
 </html>
