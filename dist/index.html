@@ -20,6 +20,12 @@
   <meta name="twitter:image" content="preview.jpg">
   
   <script id="pageScript">
+    
+    window.toggleNav = function(){
+        const n = document.getElementById("menu");
+        n.classList.toggle("hidden");
+
+    }
     //if page changed
     function IframeLoaded(){
         const f = document.getElementById("display");
@@ -38,6 +44,8 @@
     }
       //check if there is a hash (open that file) 
       window.addEventListener("load" , ()=>{
+        const n = document.getElementById("menu");
+        n.classList.add("hidden");
         const f = document.getElementById("display");
          if(window.location.hash.length>3){
            const loc = window.location.hash.substring(1);
@@ -67,6 +75,12 @@
 <body>
   <aside>
   <div id="logo" class="desktop">📕</div>
+  <div id="logo-mobile" class="mobile">📕</div>
+  <div id="burger" class="mobile" onclick="toggleNav()">
+    <hr />
+    <hr />
+    <hr />
+  </div>
   <nav id="menu">
   <ul>
     <li><a href="cover.html#view" target="display" data-title="O la la">Main</a></li>
