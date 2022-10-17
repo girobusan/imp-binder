@@ -27,9 +27,43 @@
 
     }
     //if page changed
-    function IframeLoaded(){
+    function IframeUnloaded(){
         const f = document.getElementById("display");
+        console.log("unload..." , f.contentWindow.location)
+    }
+    function IframeError(e){
+        console.log("error.." , e)
+    }
+    function IframeClicked(e){
+      console.log("click" , e )
+      const frame = document.getElementById("display");
+      if(e.target.getAttribute("href")){
+        console.log("link to" , e.target.href);
+        const myo = window.location.origin;
+        if(e.target.href.startsWith(myo)){
+          frame.contentWindow.location =e.target.href + "#view";
+          e.preventDefault();
+          e.stopPropagation();
+          }else{
+          document.getElementById("display").contentWindow.stop();
+          window.location.replace(e.target.href);
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }
+    }
+    function IframeLoaded(){
+        console.log("load...")
+        const f = document.getElementById("display");
+        
         try{
+          console.log(f.contentWindow.location)
+          f.contentWindow.onclick =  IframeClicked;
+          if(f.contentWindow.location.origin!=window.location.origin){
+              const l = f.contentWindow.location;
+              f.contentWindow.history.go(-1);
+              window.location = l;
+          }
           window.document.title = f.contentWindow.document.title;
           const p = f.contentWindow.location.pathname;
           window.location.hash = "#" + p
